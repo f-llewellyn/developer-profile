@@ -1,0 +1,33 @@
+---
+import {Icon} from "astro-icon"
+
+interface Props {
+    link: string;
+    text: string;
+    icon?: string;
+}
+
+const {link, text, icon} = Astro.props
+---
+
+<a href={link}>{icon ? <Icon pack="mdi" name={icon} /> : null}{text}</a>
+
+<style lang="scss">
+    a {
+        display: flex;
+        gap: .5rem;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        padding: 5px 10px;
+        font-size: 16px;
+        border-radius: 10px;
+        background-color: #696969;
+
+        [astro-icon] {
+            width: 20px;
+            height: 20px;
+        }
+        
+    }
+</style>

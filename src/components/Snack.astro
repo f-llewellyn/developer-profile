@@ -1,0 +1,40 @@
+---
+interface Props {
+    name: string,
+    type: "FrontEnd" | "BackEnd" | "Service" | string,
+}
+
+const {name, type} = Astro.props;
+
+let colour
+
+switch (type) {
+    case "FrontEnd":
+        colour = "#247C44";
+        break;
+    case "BackEnd":
+        colour = "#992D3B";
+        break;
+    case "Service":
+        colour = "#867B35";
+        break;
+
+    default:
+        colour = "#247C44";
+        break;
+}
+
+---
+<span>{name}</span>
+
+<style lang="scss" define:vars={{colour}}>
+    span {
+        background-color: var(--colour);
+        flex-grow: 1;
+        text-align: center;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+</style>

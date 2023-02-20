@@ -1,0 +1,94 @@
+---
+import Snack from './Snack.astro';
+import Button from './Button.astro';
+import type { Project } from '../pages/index.astro';
+
+interface Props {
+    project: Project;
+}
+
+const {project} = Astro.props
+---
+
+<div class="project">
+    <h4>{project.title}</h4>
+    <span>{project.tag}</span>
+    <a href={project.link} target="_">
+        <div class="img__container"><img src={project.img} alt={`${project.title} preview`}></div>
+    </a>
+    <div class="snacks">
+        {project.technologies.map(({name, type}) => (
+            <Snack name={name} type={type}/>
+        ))}
+    </div>
+    <div class="project__buttons">
+        <Button link={project.github} text="Source" icon="github"/>
+    </div>
+</div>
+
+<style lang="scss">
+.project {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h4 {
+        font-size: 20pt;
+    }
+
+    span {
+        font-size: 14px;
+    }
+
+    .img__container {
+        position: relative;
+        cursor: pointer;
+        img {
+            width: 100%;
+            margin-top: .5rem;
+            aspect-ratio: 16 / 9;
+            object-fit: cover;
+        }
+        &::before {
+            content: "View Live Demo";
+            display: grid;
+            place-items: center;
+            position: absolute;
+            top: .5rem;
+            bottom: .25rem;
+            width: 100%;
+            font-weight: bold;
+            font-size: 20px;
+            color: var(--grey-100);
+            background-color: var(--green-transparent);
+            backdrop-filter: blur(1.5px);
+            opacity: 0;
+            transition: opacity 250ms;
+        }
+
+        &:hover::before,
+        &:focus::before {
+            opacity: 1;
+        }
+    }
+    
+
+    .snacks {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        width: 100%;
+        margin: .2rem 0;
+        gap: .5rem;
+    }
+
+    .project__buttons {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        padding: .5rem 0;
+        gap: .5rem;
+    }
+}
+
+
+</style>

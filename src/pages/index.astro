@@ -1,0 +1,292 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Project from '../components/Project.astro';
+import Experience from '../components/Experience.astro';
+
+export interface Project {
+	title: string;
+	tag: string;
+	img: string;
+	link: string;
+	github: string;
+	technologies: {name: string, type: "FrontEnd" | "BackEnd" | "Service"}[]
+}
+
+export interface Job {
+	jobTitle: string;
+	employer: string;
+	startDate: string | Date;
+	endDate: string | Date;
+	technologies: {name: string, type: "FrontEnd" | "BackEnd" | "Service"}[];
+	overview: string;
+	points: string[];
+}
+
+const projects: Project[] = [
+	{
+		title: "Bike Builder (WIP)",
+		tag: "Build a virtual bike. It's cheaper.",
+		img: "/img/bikeBuilder.png",
+		link: "https://somebikes.vercel.app/",
+		github: "https://github.com/f-llewellyn/somebikes",
+		technologies: [
+		{
+			name: "Next.js",
+			type: "FrontEnd"
+		},
+		{
+			name: "Tailwind",
+			type: "FrontEnd"
+		},
+		{
+			name: "PostgresSQL",
+			type: "BackEnd"
+		},
+		{
+			name: "Scrapy",
+			type: "Service"
+		}
+		]
+	},
+	{
+		title: "read.me",
+		tag: "Write a README like a pro!",
+		img: "/img/readme.png",
+		link: "https://read-me-murex.vercel.app/",
+		github: "https://github.com/f-llewellyn/read.me",
+		technologies: [
+		{
+			name: "SvelteKit",
+			type: "FrontEnd"
+		},
+		{
+			name: "Tailwind",
+			type: "FrontEnd"
+		},
+		{
+			name: "Github API",
+			type: "BackEnd"
+		},
+		{
+			name: "Vercel",
+			type: "Service"
+		}
+		]
+	},
+	{
+		title: "JobFair",
+		tag: "Don't get mugged off!",
+		img: "/img/jobfair.png",
+		link: "https://jobfair-cyan.vercel.app/",
+		github: "https://github.com/f-llewellyn/jobfair",
+		technologies: [
+		{
+			name: "Vue.js",
+			type: "FrontEnd"
+		},
+		{
+			name: "Vite",
+			type: "FrontEnd",
+		},
+		{
+			name: "Express.js",
+			type: "BackEnd"
+		},
+		{
+			name: "PWA",
+			type: "Service"
+		}
+		]
+	}
+]
+
+const jobs: Job[] = [
+	{
+		jobTitle: "Software Engineer",
+		employer: "BriefYourMarket",
+		technologies: [
+			{
+				name: "React",
+				type: "FrontEnd",
+			},
+			{
+				name: "TypeScript",
+				type: "FrontEnd",
+			},
+			{
+				name: "MUI",
+				type: "FrontEnd",
+			},
+			{
+				name: "Redux Saga",
+				type: "FrontEnd",
+			},
+			{
+				name: "Azure Devops",
+				type: "Service"
+			},
+			{
+				name: "Git",
+				type: "Service"
+			}
+	],
+		overview: "I spearhead the front end of my project, working on a large scale React web app to create a unified and cohesive UX for estate agencies to get all of their market leads.",
+		points: [
+			"Spearheaded project front end, overseeing on all desicions made, often activley developing them.",
+			"Managed a migration from React 16 to 18, which included several deep refactors of major components.",
+			"Assigned to front-end lead of project after 4 months of employment.",
+			"Re-engineered components across the application to use MUI in order to enforce consistency both visually and functionally across the application.",
+			"Massively increased the test coverage with useful and effective tests.",
+			"Introduced accessibility-first approach to testing, with QA adopting this method, ensuring that software is accessable to all users",
+			"Working in an agile environment." ],
+		startDate: "July 2022",
+		endDate: "Present"
+	},
+	{
+		jobTitle: "Fullstack Developer, Devops",
+		employer: "Self Employed",
+		technologies: [
+			{
+				name: "HTML",
+				type: "FrontEnd",
+			},
+			{
+				name: "CSS",
+				type: "FrontEnd",
+			}, 
+			{
+				name: "JS",
+				type: "FrontEnd",
+			},
+			{
+				name: "Bootstrap",
+				type: "FrontEnd",
+			},
+			{
+				name: "Netlify",
+				type: "Service",
+			},
+			{
+				name: "Git",
+				type: "Service",
+			}
+	],
+		overview: "While studying for my A-Levels, I decided I wanted a job doing something that I enjoyed and could choose my own hours for, to fit around my studies. I realised that a freelance developer would be a perfect fit. I worked with many local businesses, breathing new life into their online presence through eye-catching designs, robust websites and reliable hosting.",
+		points: [
+			"Design, develop and deploy sites for various clients, involving them directly with each phase to ensure that they were happy with the final product.",
+			"Talk to clients about issues and attempt to resolve them in a positive manner",
+			"Create high quality software that's worthy of paying for",
+			"Massively increased the test coverage with useful and effective tests.",
+			"Maintain boundaries with clients, ensuring they knew when I was available to contact for the benefit of everyone involved"
+		],
+		startDate: "January 2022",
+		endDate: "July 2022"
+	},
+]
+
+---
+
+<Layout title="Finn Llewellyn | Full-Stack Developer">
+	<main>
+		<div class="container">
+			<div class="main__content">
+				<h1 class="title">Finn Llewellyn</h1>
+				<p class="sub-title">I try to build things for the web that real people would want to use. Whether it's a robust and good looking front-end, or an all in, full-stack web app I'm ready to make it.</p>
+			</div>
+		</div>
+	</main>
+	<section class="projects" id="projects">
+		<div class="container">
+			<div class="projects__content">
+				<h3>Projects</h3>
+
+				<div class="projects__grid">
+					{projects.map((project) => (
+						<Project project={project} />
+					))}
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="experience" id="experience">
+		<div class="container">
+			<div class="experience__content">
+				<h3>Experience</h3>
+
+				<div class="experience__grid">
+					{jobs.map((job) => (
+						<Experience job={job} />
+					))}
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style lang="scss">
+	main {
+		min-height: 100vh;
+		
+		&::after {
+			content: "";
+			background: var(--grey-400) url("/main-bg.svg") no-repeat center;
+			background-size: cover;
+			filter: blur(3px);
+			position: absolute;
+			inset: 0 0 0 0;
+			z-index: -1;
+		}
+
+		& .main__content {
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			gap: 1rem;
+		}
+	}
+
+	.projects {
+		.projects__content {
+			margin: 2rem 0;
+
+			h3 {
+				text-align: center;
+				font-size: 24pt;
+			}
+		}
+
+		.projects__grid {
+			margin: 2rem 0;
+			display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(295px, 1fr));
+			gap: 2rem;
+		}
+	}
+
+	.experience {
+		.experience__content {
+			margin: 2rem 0;
+
+			h3 {
+				text-align: center;
+				font-size: 24pt;
+			}
+		}
+
+		.experience__grid {
+			margin: 2rem 0;
+			display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(295px, 1fr));
+
+			gap: 6rem;
+		}
+	}
+
+	@media(min-width: 1200px) {
+		.container {
+			padding: 0 2rem;
+		}
+	}
+
+</style>

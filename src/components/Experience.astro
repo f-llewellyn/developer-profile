@@ -1,0 +1,72 @@
+---
+import type { Job } from '../pages/index.astro';
+import Snack from './Snack.astro';
+
+interface Props {
+    job: Job
+}
+
+const { job } = Astro.props
+---
+
+<div class="experience">
+    <h4>{job.jobTitle}</h4>
+    <div class="experience__details">
+        <span class="employer">{job.employer}</span>
+        <span>{job.startDate} - {job.endDate}</span>
+    </div>
+    <div class="snacks">
+        {job.technologies.map(({name, type}) => (
+            <Snack name={name} type={type} />
+        ))}
+    </div>
+    <ul>
+        {job.points.map((point) => <li>{point}</li>)}
+    </ul>
+</div>
+
+<style lang="scss">
+    .experience {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        h4 {
+            font-size: 20pt;
+        }
+
+        span, p {
+            font-size: 14px;
+        }
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+            font-size: 14px;
+            margin-left: 0;
+            padding-left: 15px;
+        }
+
+        .employer {
+            font-size: 16px;
+            font-weight: 500;
+            font-style: italic;
+            margin-bottom: .25rem;
+        }
+
+        .experience__details {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .snacks {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            width: 100%;
+            margin: .2rem 0;
+            gap: .5rem;
+        }
+    }
+
+</style>
